@@ -118,12 +118,11 @@ def insert_key():
     data = request.get_json()
     room_id = data["room"]
     rfid = data["rfid"]
-    borrowed = data["borrowed"]
 
     with connection:
         with connection.cursor() as cursor:
             cursor.execute(CREATE_KEYS_TABLE)
-            cursor.execute(INSERT_KEY, (room_id, rfid, borrowed))
+            cursor.execute(INSERT_KEY, (room_id, rfid, False))
     
     return {"message": f"Key with RFID: {rfid} was added on room {room_id}."}, 201
 
